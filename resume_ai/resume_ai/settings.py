@@ -30,9 +30,13 @@ SECRET_KEY = 'django-insecure-v_k74a00a*hq6ptjzoxh+j%)=x=)8uhd)+k00!0*qcr)p1k#3=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
 
+CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
 
@@ -65,10 +69,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'resume_ai.urls'
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://192.168.31.13:3000",
-]
+
 
 TEMPLATES = [
     {

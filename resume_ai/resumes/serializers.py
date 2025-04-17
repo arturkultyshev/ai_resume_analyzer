@@ -12,7 +12,10 @@ class ResumeUploadSerializer(serializers.ModelSerializer):
         fields = ('id', 'file', 'uploaded_at', 'extracted_text', 'analysis_result', 'score', 'feedback')
 
     def create(self, validated_data):
-        resume = super().create(validated_data)
+        user = self.context["request"].user
+        validated_data.pop("user", None)
+
+        resume = Resume.objects.create(user=user, **validated_data)  # ✅ связываем с пользователем
         path = resume.file.path
 
         # Извлечение текста
@@ -27,12 +30,7 @@ class ResumeUploadSerializer(serializers.ModelSerializer):
 
         # AI анализ
         result = analyze_resume(resume.extracted_text)
-        resume.analysis_result = result
-        resume.score = result.get("score", 0)
-
-        result = analyze_resume(resume.extracted_text)
         validated_data = ResumeAnalysis(**result)
-
         resume.analysis_result = validated_data.dict()
         resume.score = validated_data.score
 
@@ -46,7 +44,7 @@ class ResumeUploadSerializer(serializers.ModelSerializer):
         collection = get_mongo_collection()
         collection.insert_one({
             "resume_id": resume.id,
-            "user": resume.user.username,
+            "user": user.username,
             "skills": result.get("skills"),
             "experience_years": result.get("experience_years"),
             "education": result.get("education"),

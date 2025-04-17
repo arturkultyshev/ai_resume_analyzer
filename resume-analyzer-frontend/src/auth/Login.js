@@ -14,10 +14,21 @@ export default function Login({ onLogin }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 max-w-md mx-auto mt-10">
-      <input className="border p-2 w-full" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-      <input className="border p-2 w-full" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      <button className="bg-blue-500 text-white px-4 py-2 rounded">Login</button>
-    </form>
+      <form onSubmit={handleSubmit} className="login-form">
+          <input
+              className="login-input"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+              className="login-input"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+          />
+          <button className="login-btn">Войти</button>
+      </form>
   );
 }

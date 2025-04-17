@@ -1,19 +1,18 @@
 from rest_framework import generics, permissions
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from django.core.cache import cache
 from .models import Resume
 from .serializers import ResumeUploadSerializer
 from rest_framework.permissions import IsAuthenticated
 from django_ratelimit.decorators import ratelimit
 from django.utils.decorators import method_decorator
+from rest_framework.generics import ListAPIView
 
 @method_decorator(ratelimit(key='user', rate='10/m', block=True), name='dispatch')
-class ResumeListView(APIView):
+class ResumeListView(ListAPIView):
+    serializer_class = ResumeUploadSerializer
     permission_classes = [IsAuthenticated]
 
-    def get(self, request):
-        return Response({"message": "Success with rate limit"})
+    def get_queryset(self):
+        return Resume.objects.filter(user=self.request.user)
 
 
 class ResumeUploadView(generics.CreateAPIView):

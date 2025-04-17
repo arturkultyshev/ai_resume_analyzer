@@ -1,38 +1,235 @@
-.App {
-  text-align: center;
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px;
+  color: #ffffff;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.section-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #a569bd;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #a569bd;
+  margin-bottom: 24px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.error {
+  color: #ff4d4d;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.empty {
+  color: #999;
+  font-style: italic;
+}
+
+.resume-card {
+  background-color: #1a1a1a;
+  border: 1px solid #5e3370;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(142, 68, 173, 0.3); /* 💜 glow */
+  transition: transform 0.3s ease;
+}
+
+.resume-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 18px rgba(168, 85, 247, 0.5);
+}
+
+.resume-title {
+  color: #a569bd;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.resume-label {
+  margin-top: 12px;
+  font-weight: 600;
+  color: #dcdcdc;
+}
+
+.resume-list {
+  margin-left: 20px;
+  color: #cccccc;
+}
+
+.recommendations {
+  color: #ff7777;
+}
+
+.resume-feedback {
+  background-color: #111;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 8px;
+  color: #ccc;
+  font-size: 14px;
+  overflow-x: auto;
+}
+
+nav {
+  background-color: #5e3370;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+body {
+  background-color: #0d0d0d;
+  color: #ffffff;
+}
+button {
+  background-color: #8e44ad;
+}
+
+button:hover {
+  background-color: #a569bd;
+}
+.navbar {
+  background-color: #1a1a1a;
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(142, 68, 173, 0.3);
+  border-bottom: 1px solid #5e3370;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-link {
+  color: #a569bd;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.logout-btn {
+  background-color: #8e44ad;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.logout-btn:hover {
+  background-color: #a569bd;
+}
+.upload-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 24px;
+  color: #ffffff;
+}
+
+.upload-title {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #a569bd;
+}
+
+.file-input {
+  display: block;
+  margin-bottom: 20px;
+  color: #cccccc;
+  background-color: #1a1a1a;
+  border: 1px solid #5e3370;
+  padding: 10px;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.upload-btn {
+  background-color: #8e44ad;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.upload-btn:hover {
+  background-color: #a569bd;
+}
+
+.upload-result {
+  background-color: #1a1a1a;
+  border: 1px solid #5e3370;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 24px;
+  box-shadow: 0 0 10px rgba(142, 68, 173, 0.3);
+}
+
+.result-title {
+  color: #a569bd;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.result-json {
+  background-color: #0d0d0d;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #cccccc;
+  overflow-x: auto;
+}
+.login-form {
+  max-width: 400px;
+  margin: 80px auto 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 16px;
+  padding: 24px;
+  background-color: #1a1a1a;
+  border: 1px solid #5e3370;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(142, 68, 173, 0.3);
+}
+
+.login-input {
+  padding: 10px 14px;
+  border: 1px solid #5e3370;
+  border-radius: 6px;
+  background-color: #0d0d0d;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.login-input::placeholder {
+  color: #888;
+}
+
+.login-btn {
+  background-color: #8e44ad;
   color: white;
+  padding: 10px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.login-btn:hover {
+  background-color: #a569bd;
 }
