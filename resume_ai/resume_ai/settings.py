@@ -67,7 +67,7 @@ ROOT_URLCONF = 'resume_ai.urls'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "http://192.168.31.13:3000",  # ✅ обязательно!
+    "http://192.168.31.13:3000",
 ]
 
 TEMPLATES = [

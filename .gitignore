@@ -21,3 +21,5 @@ media/
 
 # Database dumps
 *.sql
+.idea
+
