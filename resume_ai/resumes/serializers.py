@@ -5,6 +5,7 @@ from .ai import analyze_resume
 from .feedback import generate_resume_feedback
 from .mongo_connector import get_mongo_collection
 from .pydantic_models import ResumeAnalysis
+from jobs.models import Job
 
 class ResumeUploadSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,7 +16,7 @@ class ResumeUploadSerializer(serializers.ModelSerializer):
         user = self.context["request"].user
         validated_data.pop("user", None)
 
-        resume = Resume.objects.create(user=user, **validated_data)  # ✅ связываем с пользователем
+        resume = Resume.objects.create(user=user, **validated_data)
         path = resume.file.path
 
         # Извлечение текста
@@ -34,6 +35,26 @@ class ResumeUploadSerializer(serializers.ModelSerializer):
         resume.analysis_result = validated_data.dict()
         resume.score = validated_data.score
 
+        # 🔍 Подбор подходящих вакансий
+        user_skills = set(validated_data.skills)
+        matching_jobs = []
+
+        for job in Job.objects.all():
+            job_skills = set(job.required_skills)
+            match_count = len(user_skills & job_skills)
+            total_required = len(job_skills)
+            match_score = match_count / total_required if total_required else 0
+
+            if match_score >= 0.5:  # порог совпадения 50%
+                matching_jobs.append({
+                    "id": job.id,
+                    "title": job.title,
+                    "location": job.location,
+                    "match_score": round(match_score * 100),
+                })
+
+        resume.analysis_result["matching_jobs"] = matching_jobs
+
         # Фидбек
         feedback = generate_resume_feedback(resume.extracted_text)
         resume.feedback = feedback
@@ -50,7 +71,7 @@ class ResumeUploadSerializer(serializers.ModelSerializer):
             "education": result.get("education"),
             "score": result.get("score"),
             "feedback": feedback,
+            "matching_jobs": matching_jobs,
         })
 
         return resume
-

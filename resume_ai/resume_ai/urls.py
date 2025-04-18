@@ -3,7 +3,7 @@ from django.urls import path
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from users.views import RegisterView
 from resumes.views import ResumeUploadView
-from jobs.views import JobListCreateView, MatchResumeView
+from jobs.views import JobListCreateAPIView, JobDeleteAPIView
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -15,8 +15,8 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/resumes/upload/', ResumeUploadView.as_view(), name='resume-upload'),
-    path('api/jobs/', JobListCreateView.as_view(), name='job-list-create'),
-    path('api/jobs/match/', MatchResumeView.as_view(), name='match-resume'),
+    path('api/jobs/', JobListCreateAPIView.as_view(), name="job-list-create"),
+    path('api/jobs/<int:pk>/', JobDeleteAPIView.as_view(), name="job-delete")
 ]
 
 schema_view = get_schema_view(

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import api from "../api/axios";
 import { getToken } from "../utils/token";
+import ResumeResultTabs from "../components/ResumeResultTabs";
+
 
 export default function ResumeUpload() {
   const [file, setFile] = useState(null);
@@ -36,7 +38,7 @@ export default function ResumeUpload() {
           {result && (
               <div className="upload-result">
                   <h2 className="result-title">Анализ резюме</h2>
-                  <pre className="result-json">{JSON.stringify(result, null, 2)}</pre>
+                  {result && <ResumeResultTabs result={result} />}
               </div>
           )}
       </div>
